@@ -10,9 +10,19 @@ export class MongoCreatePomodoroRepository
   implements ICreatePomodoroRepository
 {
   async createPomodoro(params: CreatePomodoroParams): Promise<Pomodoro> {
+    const setParams = {
+      title: params.title,
+      timeWorking: params.timeWorking,
+      timeShortResting: params.timeShortResting,
+      timeLongResting: params.timeLongResting,
+      totalTimePomodoro: 0,
+      createBy: params.createBy,
+      createdAt: Date.now(),
+    };
+
     const { insertedId } = await MongoClient.db
       .collection("pomodoros")
-      .insertOne(params);
+      .insertOne(setParams);
 
     const pomodoro = await MongoClient.db
       .collection<OmitId<Pomodoro>>("pomodoros")
@@ -20,19 +30,8 @@ export class MongoCreatePomodoroRepository
 
     if (!pomodoro) throw new Error("Pomodoro not created");
 
-    const { _id } = pomodoro;
+    const { _id, ...rest } = pomodoro;
 
-    const formatedPomodoro: Pomodoro = {
-      id: _id.toHexString(),
-      title: pomodoro.title,
-      timeWorking: pomodoro.timeWorking,
-      timeShortResting: pomodoro.timeShortResting,
-      timeLongResting: pomodoro.timeLongResting,
-      totalTimePomodoro: 0,
-      createBy: pomodoro.createBy,
-      createdAt: Date.now(),
-    };
-
-    return formatedPomodoro;
+    return { id: _id.toHexString(), ...rest };
   }
 }
