@@ -5,7 +5,7 @@ import {
 } from "../../controllers/UserController/createUser/protocol";
 import { MongoClient } from "../../database/mongo";
 import { User } from "../../models/User";
-import { OmitIdUser } from "../../controllers/protocol";
+import { OmitId } from "../../controllers/protocol";
 
 export class MongoCreateUserRepository implements ICreateUserRepository {
   async createUser(params: CreateUserParams): Promise<User> {
@@ -20,7 +20,7 @@ export class MongoCreateUserRepository implements ICreateUserRepository {
       .insertOne(paramsWithEncryptedPaassword);
 
     const user = await MongoClient.db
-      .collection<OmitIdUser>("users")
+      .collection<OmitId<User>>("users")
       .findOne({ _id: insertedId });
 
     if (!user) throw new Error("User not created");

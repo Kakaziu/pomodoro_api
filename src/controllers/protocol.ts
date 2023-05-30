@@ -15,4 +15,4 @@ export interface ResponseBodyError {
   message: string;
 }
 
-export type OmitIdUser = Omit<User, "id">;
+export type OmitId<I> = Omit<I, "id">;
