@@ -1,4 +1,8 @@
-import { badRequest, ok } from "../../../helpers/responseFunctions";
+import {
+  badRequest,
+  ok,
+  serverError,
+} from "../../../helpers/responseFunctions";
 import { Pomodoro } from "../../../models/Pomodoro";
 import { MongoUpdatePomodoroRepository } from "../../../repositories/pomodoroRepositories/updatePomodoro";
 import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
@@ -11,17 +15,21 @@ export class UpdatePomodoroController implements IUpdatePomodoroController {
   async handle(
     httpRequest: HttpRequest<UpdatePomodoroParams>
   ): Promise<HttpResponse<Pomodoro | ResponseBodyError>> {
-    const body = httpRequest?.body;
-    const id = httpRequest?.params?.id;
+    try {
+      const body = httpRequest?.body;
+      const id = httpRequest?.params?.id;
 
-    if (!body) return badRequest("Missing body");
-    if (!id) return badRequest("Missing Id");
+      if (!body) return badRequest("Missing body");
+      if (!id) return badRequest("Missing Id");
 
-    const pomodoro = await this.updatePomodoroRepository.updatePomodoro(
-      id,
-      body
-    );
+      const pomodoro = await this.updatePomodoroRepository.updatePomodoro(
+        id,
+        body
+      );
 
-    return ok<Pomodoro>(pomodoro);
+      return ok<Pomodoro>(pomodoro);
+    } catch (e) {
+      return serverError();
+    }
   }
 }

@@ -11,8 +11,8 @@ export class MongoGetPomodorosRepository implements IGetPomodorosRepository {
       .toArray();
 
     return users.map(({ _id, ...rest }) => ({
-      ...rest,
       id: _id.toHexString(),
+      ...rest,
     }));
   }
 }

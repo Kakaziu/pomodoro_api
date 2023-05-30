@@ -4,8 +4,21 @@ import { CreatePomodoroController } from "../controllers/PomodoroController/crea
 import loginRequired from "../middlewares/loginRequired";
 import { MongoUpdatePomodoroRepository } from "../repositories/pomodoroRepositories/updatePomodoro";
 import { UpdatePomodoroController } from "../controllers/PomodoroController/updatePomodoro/updatePomodoro";
+import { MongoGetPomodorosRepository } from "../repositories/pomodoroRepositories/getPomodoros";
+import { GetPomodorosController } from "../controllers/PomodoroController/getPomodoros/getPomodoros";
 
 const routes = Router();
+
+routes.get("/", loginRequired, async (req, res) => {
+  const mongoGetPomodorosRepository = new MongoGetPomodorosRepository();
+  const getPomodorosController = new GetPomodorosController(
+    mongoGetPomodorosRepository
+  );
+
+  const { statusCode, body } = await getPomodorosController.handle({});
+
+  return res.status(statusCode).json(body);
+});
 
 routes.post("/", loginRequired, async (req, res) => {
   const mongoCreatePomodoroRepository = new MongoCreatePomodoroRepository();
