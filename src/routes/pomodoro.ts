@@ -2,6 +2,8 @@ import { Router } from "express";
 import { MongoCreatePomodoroRepository } from "../repositories/pomodoroRepositories/createPomodoro";
 import { CreatePomodoroController } from "../controllers/PomodoroController/createPomodoro/createPomodoro";
 import loginRequired from "../middlewares/loginRequired";
+import { MongoUpdatePomodoroRepository } from "../repositories/pomodoroRepositories/updatePomodoro";
+import { UpdatePomodoroController } from "../controllers/PomodoroController/updatePomodoro/updatePomodoro";
 
 const routes = Router();
 
@@ -16,6 +18,20 @@ routes.post("/", loginRequired, async (req, res) => {
 
   const { statusCode, body } = await createPomodoroController.handle({
     body: bodyWithUserId,
+  });
+
+  return res.status(statusCode).json(body);
+});
+
+routes.patch("/:id", loginRequired, async (req, res) => {
+  const mongoUpdatePomodoroRepository = new MongoUpdatePomodoroRepository();
+  const updatePomodoroController = new UpdatePomodoroController(
+    mongoUpdatePomodoroRepository
+  );
+
+  const { statusCode, body } = await updatePomodoroController.handle({
+    params: req.params,
+    body: req.body,
   });
 
   return res.status(statusCode).json(body);

@@ -5,7 +5,6 @@ export interface Pomodoro {
   timeShortResting: number;
   timeLongResting: number;
   totalTimePomodoro: number;
-  tasks: string[];
   createBy: number;
   createdAt: number;
 }
