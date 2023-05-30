@@ -6,5 +6,5 @@ export interface Pomodoro {
   timeLongResting: number;
   totalTimePomodoro: number;
   createBy: number;
-  createdAt: string;
+  createdAt: number;
 }

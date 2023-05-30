@@ -27,8 +27,7 @@ export class CreatePomodoroController implements ICreatePomodoroController {
         "title",
         "timeWorking",
         "timeShortResting",
-        "timeLongResting",
-        "TotalTimePomodoro"
+        "timeLongResting"
       );
 
       if (haveEmptyCamps) return badRequest(haveEmptyCamps);

@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import cors from "cors";
 import userRoutes from "./routes/user";
 import tokenRoutes from "./routes/token";
+import pomodoroRoutes from "./routes/pomodoro";
 import { MongoClient } from "./database/mongo";
 
 config();
@@ -20,6 +21,7 @@ MongoClient.connect()
 
 app.use("/users", userRoutes);
 app.use("/tokens", tokenRoutes);
+app.use("/pomodoros", pomodoroRoutes);
 
 app.on("Database Ready", () => {
   app.listen(process.env.PORT, () => {
