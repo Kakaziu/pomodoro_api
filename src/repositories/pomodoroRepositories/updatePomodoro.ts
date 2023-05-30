@@ -1,6 +1,6 @@
 import { ObjectId } from "mongodb";
 import {
-  IUpdatePomodorosRepository,
+  IUpdatePomodoroRepository,
   UpdatePomodoroParams,
 } from "../../controllers/PomodoroController/updatePomodoro/protocol";
 import { MongoClient } from "../../database/mongo";
@@ -8,7 +8,7 @@ import { Pomodoro } from "../../models/Pomodoro";
 import { OmitId } from "../../controllers/protocol";
 
 export class MongoUpdatePomodoroRepository
-  implements IUpdatePomodorosRepository
+  implements IUpdatePomodoroRepository
 {
   async updatePomodoro(
     id: string,
