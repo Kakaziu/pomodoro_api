@@ -29,7 +29,7 @@ export class MongoCreatePomodoroRepository
       timeShortResting: pomodoro.timeShortResting,
       timeLongResting: pomodoro.timeLongResting,
       totalTimePomodoro: 0,
-      createBy: 1,
+      createBy: pomodoro.createBy,
       createdAt: Date.now(),
     };
 

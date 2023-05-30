@@ -40,7 +40,7 @@ export class CreateTokenController implements ICreateTokenController {
 
       const token = jwt.sign(
         { id: user.id, email: user.email },
-        process.env.SECRET as jwt.Secret
+        process.env.SECRET ?? ""
       );
 
       return ok<CreateTokenResponse>({ user, token });
