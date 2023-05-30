@@ -20,8 +20,8 @@ export class MongoCreatePomodoroRepository
 
     if (!pomodoro) throw new Error("Pomodoro not created");
 
-    const { _id, ...rest } = pomodoro;
+    const { _id, totalTimePomodoro, ...rest } = pomodoro;
 
-    return { id: _id.toHexString(), ...rest };
+    return { id: _id.toHexString(), totalTimePomodoro: 0, ...rest };
   }
 }

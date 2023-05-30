@@ -1,4 +1,5 @@
 import { Pomodoro } from "../../../models/Pomodoro";
+import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
 
 export interface CreatePomodoroParams {
   title: string;
@@ -7,6 +8,12 @@ export interface CreatePomodoroParams {
   timeLongResting: number;
   totalTimePomodoro: number;
   createBy: number;
+}
+
+export interface ICreatePomodoroController {
+  handle(
+    httpRequest: HttpRequest<CreatePomodoroParams>
+  ): Promise<HttpResponse<Pomodoro | ResponseBodyError>>;
 }
 
 export interface ICreatePomodoroRepository {
