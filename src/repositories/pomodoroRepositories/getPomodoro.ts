@@ -6,8 +6,9 @@ import { OmitId } from "../../controllers/protocol";
 
 export class MongoGetPomodoroRepository implements IGetPomodoroRepository {
   async getPomodoro(id: string): Promise<Pomodoro> {
+    console.log(id);
     const pomodoro = await MongoClient.db
-      .collection<OmitId<Pomodoro>>("users")
+      .collection<OmitId<Pomodoro>>("pomodoros")
       .findOne({ _id: new ObjectId(id) });
 
     if (!pomodoro) throw new Error("User not found");

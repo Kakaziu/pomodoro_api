@@ -24,6 +24,7 @@ export class GetPomodoroController implements IGetPomodoroController {
 
       return ok<Pomodoro>(pomodoro);
     } catch (e) {
+      console.log(e);
       return serverError();
     }
   }

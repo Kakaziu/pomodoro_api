@@ -6,6 +6,8 @@ import { MongoUpdatePomodoroRepository } from "../repositories/pomodoroRepositor
 import { UpdatePomodoroController } from "../controllers/PomodoroController/updatePomodoro/updatePomodoro";
 import { MongoGetPomodorosRepository } from "../repositories/pomodoroRepositories/getPomodoros";
 import { GetPomodorosController } from "../controllers/PomodoroController/getPomodoros/getPomodoros";
+import { GetPomodoroController } from "../controllers/PomodoroController/getPomodoro/getPomodoro";
+import { MongoGetPomodoroRepository } from "../repositories/pomodoroRepositories/getPomodoro";
 
 const routes = Router();
 
@@ -15,7 +17,7 @@ routes.get("/", loginRequired, async (req, res) => {
     mongoGetPomodorosRepository
   );
 
-  const { statusCode, body } = await getPomodorosController.handle({});
+  const { statusCode, body } = await getPomodorosController.handle();
 
   return res.status(statusCode).json(body);
 });
@@ -45,6 +47,19 @@ routes.patch("/:id", loginRequired, async (req, res) => {
   const { statusCode, body } = await updatePomodoroController.handle({
     params: req.params,
     body: req.body,
+  });
+
+  return res.status(statusCode).json(body);
+});
+
+routes.get("/:id", loginRequired, async (req, res) => {
+  const mongoGetPomodoroRepository = new MongoGetPomodoroRepository();
+  const getPomodoroController = new GetPomodoroController(
+    mongoGetPomodoroRepository
+  );
+
+  const { statusCode, body } = await getPomodoroController.handle({
+    params: req.params,
   });
 
   return res.status(statusCode).json(body);
