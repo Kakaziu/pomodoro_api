@@ -7,7 +7,7 @@ export interface CreatePomodoroParams {
   timeLongResting: number;
   totalPomodoroCompleted: number;
   totalTimePomodoro: number;
-  createBy: number;
+  createBy: string;
   createdAt: number;
 }
 

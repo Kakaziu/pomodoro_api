@@ -21,7 +21,13 @@ routes.get("/", loginRequired, async (req, res) => {
 
   const { statusCode, body } = await getPomodorosController.handle();
 
-  return res.status(statusCode).json(body);
+  if ("message" in body) return;
+
+  const userPomodoros = body.filter(
+    (pomodoro) => pomodoro.createBy === req.userId
+  );
+
+  return res.status(statusCode).json(userPomodoros);
 });
 
 routes.post("/", loginRequired, async (req, res) => {
