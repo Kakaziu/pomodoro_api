@@ -1,4 +1,8 @@
-import { badRequest, ok } from "../../../helpers/responseFunctions";
+import {
+  badRequest,
+  ok,
+  serverError,
+} from "../../../helpers/responseFunctions";
 import { Pomodoro } from "../../../models/Pomodoro";
 import {
   HttpRequest,
@@ -15,14 +19,17 @@ export class DeletePomodoroController implements IController<any, Pomodoro> {
   async handle(
     httpRequest: HttpRequest<any>
   ): Promise<HttpResponse<Pomodoro | ResponseBodyError>> {
-    const id = httpRequest?.params?.id;
+    try {
+      const id = httpRequest?.params?.id;
 
-    if (!id) return badRequest("Missing Id");
+      if (!id) return badRequest("Missing Id");
 
-    const pomodoroDeleted = await this.deletePomodoroRepository.deletePomodoro(
-      id
-    );
+      const pomodoroDeleted =
+        await this.deletePomodoroRepository.deletePomodoro(id);
 
-    return ok<Pomodoro>(pomodoroDeleted);
+      return ok<Pomodoro>(pomodoroDeleted);
+    } catch (e) {
+      return serverError();
+    }
   }
 }
