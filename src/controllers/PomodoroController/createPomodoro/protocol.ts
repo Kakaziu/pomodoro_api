@@ -8,6 +8,7 @@ export interface CreatePomodoroParams {
   totalPomodoroCompleted: number;
   totalTimePomodoro: number;
   createBy: number;
+  createdAt: number;
 }
 
 export interface ICreatePomodoroRepository {

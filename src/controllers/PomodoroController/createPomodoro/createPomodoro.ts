@@ -39,7 +39,16 @@ export class CreatePomodoroController
 
       if (haveEmptyCamps) return badRequest(haveEmptyCamps);
 
-      const pomodoro = await this.createPomodoroRepository.createPomodoro(body);
+      const pomodoro = await this.createPomodoroRepository.createPomodoro({
+        title: body.title,
+        timeWorking: body.timeWorking,
+        timeShortResting: body.timeShortResting,
+        timeLongResting: body.timeLongResting,
+        totalPomodoroCompleted: 0,
+        totalTimePomodoro: 0,
+        createBy: body.createBy,
+        createdAt: Date.now(),
+      });
 
       return created<Pomodoro>(pomodoro);
     } catch (e) {

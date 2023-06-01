@@ -30,8 +30,7 @@ routes.post("/", loginRequired, async (req, res) => {
     mongoCreatePomodoroRepository
   );
 
-  const { createBy, ...rest } = req.body;
-  const bodyWithUserId = { createBy: req.userId, ...rest };
+  const bodyWithUserId = { createBy: req.userId, ...req.body };
 
   const { statusCode, body } = await createPomodoroController.handle({
     body: bodyWithUserId,
