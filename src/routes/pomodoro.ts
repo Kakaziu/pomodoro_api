@@ -8,6 +8,8 @@ import { MongoGetPomodorosRepository } from "../repositories/pomodoroRepositorie
 import { GetPomodorosController } from "../controllers/PomodoroController/getPomodoros/getPomodoros";
 import { GetPomodoroController } from "../controllers/PomodoroController/getPomodoro/getPomodoro";
 import { MongoGetPomodoroRepository } from "../repositories/pomodoroRepositories/getPomodoro";
+import { MongoDeletePomodoroRepository } from "../repositories/pomodoroRepositories/deletePomodoro";
+import { DeletePomodoroController } from "../controllers/PomodoroController/deletePomodoro/deletePomodoro";
 
 const routes = Router();
 
@@ -47,6 +49,19 @@ routes.patch("/:id", loginRequired, async (req, res) => {
   const { statusCode, body } = await updatePomodoroController.handle({
     params: req.params,
     body: req.body,
+  });
+
+  return res.status(statusCode).json(body);
+});
+
+routes.delete("/:id", loginRequired, async (req, res) => {
+  const mongoDeletePomodoroRepository = new MongoDeletePomodoroRepository();
+  const deletePomodoroController = new DeletePomodoroController(
+    mongoDeletePomodoroRepository
+  );
+
+  const { statusCode, body } = await deletePomodoroController.handle({
+    params: req.params,
   });
 
   return res.status(statusCode).json(body);
