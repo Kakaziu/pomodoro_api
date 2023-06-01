@@ -1,11 +1,12 @@
 import validator from "validator";
 import jwt from "jsonwebtoken";
-import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
 import {
-  CreateTokenParams,
-  CreateTokenResponse,
-  ICreateTokenController,
-} from "./protocol";
+  HttpRequest,
+  HttpResponse,
+  IController,
+  ResponseBodyError,
+} from "../../protocol";
+import { CreateTokenParams, CreateTokenResponse } from "./protocol";
 import { MongoGetUserByEmailRepository } from "../../../repositories/userRepositories/getUser";
 import {
   badRequest,
@@ -14,7 +15,9 @@ import {
 } from "../../../helpers/responseFunctions";
 import { validEmptyCamps } from "../../../helpers/validEmptyCamps";
 
-export class CreateTokenController implements ICreateTokenController {
+export class CreateTokenController
+  implements IController<CreateTokenParams, CreateTokenResponse>
+{
   constructor(
     private readonly getUserRepository: MongoGetUserByEmailRepository
   ) {}

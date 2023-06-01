@@ -1,9 +1,9 @@
 import { ok, serverError } from "../../../helpers/responseFunctions";
 import { Pomodoro } from "../../../models/Pomodoro";
-import { HttpResponse, ResponseBodyError } from "../../protocol";
-import { IGetPomodorosControllers, IGetPomodorosRepository } from "./protocol";
+import { HttpResponse, IController, ResponseBodyError } from "../../protocol";
+import { IGetPomodorosRepository } from "./protocol";
 
-export class GetPomodorosController implements IGetPomodorosControllers {
+export class GetPomodorosController implements IController<any, Pomodoro[]> {
   constructor(
     private readonly getPomodorosRepository: IGetPomodorosRepository
   ) {}

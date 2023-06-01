@@ -5,10 +5,14 @@ import {
 } from "../../../helpers/responseFunctions";
 import { Pomodoro } from "../../../models/Pomodoro";
 import { MongoGetPomodoroRepository } from "../../../repositories/pomodoroRepositories/getPomodoro";
-import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
-import { IGetPomodoroController } from "./protocol";
+import {
+  HttpRequest,
+  HttpResponse,
+  IController,
+  ResponseBodyError,
+} from "../../protocol";
 
-export class GetPomodoroController implements IGetPomodoroController {
+export class GetPomodoroController implements IController<any, Pomodoro> {
   constructor(
     private readonly getPomodoroRepository: MongoGetPomodoroRepository
   ) {}

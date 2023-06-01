@@ -1,5 +1,4 @@
 import { User } from "../../../models/User";
-import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
 
 export interface CreateTokenResponse {
   user: User;
@@ -9,10 +8,4 @@ export interface CreateTokenResponse {
 export interface CreateTokenParams {
   email: string;
   password: string;
-}
-
-export interface ICreateTokenController {
-  handle(
-    httpRequest: HttpRequest<CreateTokenParams>
-  ): Promise<HttpResponse<CreateTokenResponse | ResponseBodyError>>;
 }

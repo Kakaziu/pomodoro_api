@@ -15,4 +15,10 @@ export interface ResponseBodyError {
   message: string;
 }
 
+export interface IController<P, T> {
+  handle(
+    httpRequest: HttpRequest<P>
+  ): Promise<HttpResponse<T | ResponseBodyError>>;
+}
+
 export type OmitId<I> = Omit<I, "id">;

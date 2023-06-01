@@ -6,10 +6,17 @@ import {
 import { validEmptyCamps } from "../../../helpers/validEmptyCamps";
 import { Pomodoro } from "../../../models/Pomodoro";
 import { MongoCreatePomodoroRepository } from "../../../repositories/pomodoroRepositories/createPomodoro";
-import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
-import { CreatePomodoroParams, ICreatePomodoroController } from "./protocol";
+import {
+  HttpRequest,
+  HttpResponse,
+  IController,
+  ResponseBodyError,
+} from "../../protocol";
+import { CreatePomodoroParams } from "./protocol";
 
-export class CreatePomodoroController implements ICreatePomodoroController {
+export class CreatePomodoroController
+  implements IController<CreatePomodoroParams, Pomodoro>
+{
   constructor(
     private readonly createPomodoroRepository: MongoCreatePomodoroRepository
   ) {}

@@ -1,7 +1,12 @@
 import validator from "validator";
 import { User } from "../../../models/User";
-import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
-import { ICreateUserController, CreateUserParams } from "./protocol";
+import {
+  HttpRequest,
+  HttpResponse,
+  IController,
+  ResponseBodyError,
+} from "../../protocol";
+import { CreateUserParams } from "./protocol";
 import { MongoCreateUserRepository } from "../../../repositories/userRepositories/createUser";
 import {
   badRequest,
@@ -10,7 +15,9 @@ import {
 } from "../../../helpers/responseFunctions";
 import { validEmptyCamps } from "../../../helpers/validEmptyCamps";
 
-export class CreateUserController implements ICreateUserController {
+export class CreateUserController
+  implements IController<CreateUserParams, User>
+{
   constructor(
     private readonly createUserRepository: MongoCreateUserRepository
   ) {}

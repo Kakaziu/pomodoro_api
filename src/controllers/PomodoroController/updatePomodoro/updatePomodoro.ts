@@ -5,10 +5,17 @@ import {
 } from "../../../helpers/responseFunctions";
 import { Pomodoro } from "../../../models/Pomodoro";
 import { MongoUpdatePomodoroRepository } from "../../../repositories/pomodoroRepositories/updatePomodoro";
-import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
-import { IUpdatePomodoroController, UpdatePomodoroParams } from "./protocol";
+import {
+  HttpRequest,
+  HttpResponse,
+  IController,
+  ResponseBodyError,
+} from "../../protocol";
+import { UpdatePomodoroParams } from "./protocol";
 
-export class UpdatePomodoroController implements IUpdatePomodoroController {
+export class UpdatePomodoroController
+  implements IController<UpdatePomodoroParams, Pomodoro>
+{
   constructor(
     private readonly updatePomodoroRepository: MongoUpdatePomodoroRepository
   ) {}

@@ -1,12 +1,14 @@
 import { badRequest, ok } from "../../../helpers/responseFunctions";
 import { Pomodoro } from "../../../models/Pomodoro";
-import { HttpRequest, HttpResponse, ResponseBodyError } from "../../protocol";
 import {
-  IDeletePomodoroController,
-  IDeletePomodoroRepository,
-} from "./protocol";
+  HttpRequest,
+  HttpResponse,
+  IController,
+  ResponseBodyError,
+} from "../../protocol";
+import { IDeletePomodoroRepository } from "./protocol";
 
-export class DeletePomodoroController implements IDeletePomodoroController {
+export class DeletePomodoroController implements IController<any, Pomodoro> {
   constructor(
     private readonly deletePomodoroRepository: IDeletePomodoroRepository
   ) {}
