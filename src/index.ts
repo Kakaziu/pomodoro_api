@@ -4,6 +4,7 @@ import cors from "cors";
 import userRoutes from "./routes/user";
 import tokenRoutes from "./routes/token";
 import pomodoroRoutes from "./routes/pomodoro";
+import taskRoutes from "./routes/task";
 import { MongoClient } from "./database/mongo";
 
 config();
@@ -22,6 +23,7 @@ MongoClient.connect()
 app.use("/users", userRoutes);
 app.use("/tokens", tokenRoutes);
 app.use("/pomodoros", pomodoroRoutes);
+app.use("/tasks", taskRoutes);
 
 app.on("Database Ready", () => {
   app.listen(process.env.PORT, () => {

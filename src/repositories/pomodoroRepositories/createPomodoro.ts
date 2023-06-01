@@ -15,6 +15,7 @@ export class MongoCreatePomodoroRepository
       timeWorking: params.timeWorking,
       timeShortResting: params.timeShortResting,
       timeLongResting: params.timeLongResting,
+      totalPomodoroCompleted: 0,
       totalTimePomodoro: 0,
       createBy: params.createBy,
       createdAt: Date.now(),

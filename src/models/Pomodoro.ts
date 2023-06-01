@@ -4,6 +4,7 @@ export interface Pomodoro {
   timeWorking: number;
   timeShortResting: number;
   timeLongResting: number;
+  totalPomodoroCompleted: number;
   totalTimePomodoro: number;
   createBy: number;
   createdAt: number;
