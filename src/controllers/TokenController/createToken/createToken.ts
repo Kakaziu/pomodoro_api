@@ -1,5 +1,6 @@
 import validator from "validator";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import {
   HttpRequest,
   HttpResponse,
@@ -40,6 +41,10 @@ export class CreateTokenController
       const user = await this.getUserRepository.getUserBy(body.email);
 
       if (!user) return badRequest("User not exist");
+
+      const passwordMatch = bcrypt.compareSync(body.password, user.password);
+
+      if (!passwordMatch) return badRequest("Invalid password.");
 
       const token = jwt.sign(
         { id: user.id, email: user.email },
