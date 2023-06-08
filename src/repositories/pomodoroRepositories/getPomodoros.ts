@@ -5,12 +5,14 @@ import { Pomodoro } from "../../models/Pomodoro";
 
 export class MongoGetPomodorosRepository implements IGetPomodorosRepository {
   async getPomodoros(): Promise<Pomodoro[]> {
-    const users = await MongoClient.db
+    const pomodoros = await MongoClient.db
       .collection<OmitId<Pomodoro>>("pomodoros")
       .find({})
       .toArray();
 
-    return users.map(({ _id, ...rest }) => ({
+    console.log(pomodoros);
+
+    return pomodoros.map(({ _id, ...rest }) => ({
       id: _id.toHexString(),
       ...rest,
     }));

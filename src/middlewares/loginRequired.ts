@@ -14,7 +14,7 @@ export default function loginRequired(
   next: NextFunction
 ) {
   const { authorization } = req.headers;
-  
+
   if (!authorization) return res.status(401).json({ body: "Acess denied" });
 
   try {
@@ -28,7 +28,6 @@ export default function loginRequired(
 
     return next();
   } catch (e) {
-    console.log(e);
     return res.sendStatus(401);
   }
 }
