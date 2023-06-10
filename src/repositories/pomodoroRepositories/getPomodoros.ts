@@ -10,8 +10,6 @@ export class MongoGetPomodorosRepository implements IGetPomodorosRepository {
       .find({})
       .toArray();
 
-    console.log(pomodoros);
-
     return pomodoros.map(({ _id, ...rest }) => ({
       id: _id.toHexString(),
       ...rest,
