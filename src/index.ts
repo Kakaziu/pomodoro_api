@@ -1,10 +1,10 @@
 import express from "express";
 import { config } from "dotenv";
 import cors from "cors";
-import userRoutes from "../src/routes/user";
-import tokenRoutes from "../src/routes/token";
-import pomodoroRoutes from "../src/routes/pomodoro";
-import { MongoClient } from "../src/database/mongo";
+import userRoutes from "./routes/user";
+import tokenRoutes from "./routes/token";
+import pomodoroRoutes from "./routes/pomodoro";
+import { MongoClient } from "./database/mongo";
 
 config();
 
