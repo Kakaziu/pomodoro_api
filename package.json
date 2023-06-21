@@ -2,7 +2,7 @@
   "name": "api_jwt_typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
     "start:dev": "npx nodemon --exec ts-node --files src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
