@@ -2,7 +2,7 @@
   "name": "api_jwt_typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "api/index.js",
+  "main": "src/index.js",
   "engines": {
     "node": "14.x"
   },
@@ -37,6 +37,6 @@
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.3"
   }
 }
