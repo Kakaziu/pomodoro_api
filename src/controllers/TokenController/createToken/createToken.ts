@@ -53,7 +53,7 @@ export class CreateTokenController
 
       return ok<CreateTokenResponse>({ user, token });
     } catch (e) {
-      console.error(e);
+      console.log(e);
       return serverError();
     }
   }
