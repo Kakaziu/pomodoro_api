@@ -27,7 +27,7 @@ export default function loginRequired(
     req.userEmail = email;
 
     return next();
-  } catch (e) {
+  } catch (e) { 
     return res.sendStatus(401);
   }
 }

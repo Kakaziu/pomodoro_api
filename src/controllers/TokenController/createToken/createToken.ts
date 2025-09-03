@@ -1,6 +1,13 @@
-import validator from "validator";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import validator from "validator";
+import {
+  badRequest,
+  ok,
+  serverError,
+} from "../../../helpers/responseFunctions";
+import { validEmptyCamps } from "../../../helpers/validEmptyCamps";
+import { MongoGetUserByEmailRepository } from "../../../repositories/userRepositories/getUser";
 import {
   HttpRequest,
   HttpResponse,
@@ -8,13 +15,6 @@ import {
   ResponseBodyError,
 } from "../../protocol";
 import { CreateTokenParams, CreateTokenResponse } from "./protocol";
-import { MongoGetUserByEmailRepository } from "../../../repositories/userRepositories/getUser";
-import {
-  badRequest,
-  ok,
-  serverError,
-} from "../../../helpers/responseFunctions";
-import { validEmptyCamps } from "../../../helpers/validEmptyCamps";
 
 export class CreateTokenController
   implements IController<CreateTokenParams, CreateTokenResponse>
@@ -53,6 +53,7 @@ export class CreateTokenController
 
       return ok<CreateTokenResponse>({ user, token });
     } catch (e) {
+      console.error(e);
       return serverError();
     }
   }

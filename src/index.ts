@@ -19,14 +19,14 @@ MongoClient.connect()
   })
   .catch((e) => console.log(e));
 
-app.use(cors({ origin: ["https://lambent-ganache-764a9e.netlify.app"] }));
+app.use(cors({ origin: "*" }));
 
 app.use("/users", userRoutes);
 app.use("/tokens", tokenRoutes);
 app.use("/pomodoros", pomodoroRoutes);
 
 app.on("Database Ready", () => {
-  app.listen(process.env.PORT, () => {
+  app.listen(process.env.PORT || 3000, () => {
     console.log("Server is running...");
   });
 });
