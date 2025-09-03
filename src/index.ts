@@ -19,11 +19,11 @@ MongoClient.connect()
   })
   .catch((e) => console.log(e));
 
+app.use(cors({ origin: "*" }));
+
 app.use("/users", userRoutes);
 app.use("/tokens", tokenRoutes);
 app.use("/pomodoros", pomodoroRoutes);
-
-app.use(cors());
 
 app.on("Database Ready", () => {
   app.listen(process.env.PORT, () => {
