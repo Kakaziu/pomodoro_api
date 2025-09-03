@@ -19,7 +19,7 @@ MongoClient.connect()
   })
   .catch((e) => console.log(e));
 
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: ["https://lambent-ganache-764a9e.netlify.app"] }));
 
 app.use("/users", userRoutes);
 app.use("/tokens", tokenRoutes);
